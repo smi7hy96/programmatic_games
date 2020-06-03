@@ -4,7 +4,7 @@ from game_class import *
 
 class GameTest(unittest.TestCase):
     def setUp(self):
-        self.game = Game({'limit': 60, 'iter': 5}, [1, '1', '3', '4', '5', '6', '6'], {'string':  'hello',  'score': 0}, {'limit':  40,  'largest': 20})
+        self.game = Game({'limit': 60, 'iter': 5}, [1, '1', '3', '4', '5', '6', '6'], {'string':  'hello',  'score': 0}, {'limit':  40,  'largest': 20}, {'limit':  21,  'lower': 3, 'upper': 7})
 
     def test_fibonacci_limit(self):
         self.assertEqual(self.game.fibonacci_limit(), '0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55')
@@ -28,3 +28,6 @@ class GameTest(unittest.TestCase):
 
     def test_get_chuck_joke(self):
         self.assertIsInstance((self.game.get_chuck_joke()), str)
+
+    def test_fizz_buzz(self):
+        self.assertEqual(self.game.fizz_buzz(), '1, 2, fizz, 4, 5, fizz, buzz, 8, fizz, 10, 11, fizz, 13, buzz, fizz, 16, 17, fizz, 19, 20, fizzbuzz')

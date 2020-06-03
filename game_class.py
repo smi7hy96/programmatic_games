@@ -118,3 +118,21 @@ class Game:
         joke = requests.get('https://api.chucknorris.io/jokes/random')
         self.chuck_joke = joke.json()['value']
         return self.chuck_joke
+
+    def fizz_buzz(self):
+        result_list = []
+        for x in range(1, int(self.fizz_numbers['limit'])+1):
+            result_list.append(self.__get_fizz(x))
+        return ', '.join(result_list)
+
+    def __get_fizz(self, x):
+        lower = self.fizz_numbers['lower']
+        upper = self.fizz_numbers['upper']
+        if x % lower == 0 and x % upper == 0:
+            return 'fizzbuzz'
+        elif x % lower == 0:
+            return 'fizz'
+        elif x % upper == 0:
+            return 'buzz'
+        else:
+            return str(x)
