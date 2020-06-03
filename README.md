@@ -9,7 +9,8 @@
     
 ## Scrabble Calculator
 
-- ? random letters ? needs more clarification
+- calculates score of string entered.
+- letters have different points
 
 ## Remove Duplicates
 
@@ -23,5 +24,7 @@
 - new limit
 - 2 boundaries
 
-generate up ro specific number (limit)
-largest prime out of number given
+## Prime Numbers
+
+- Generate list of primes up to a limit 
+- Find largest prime number from number entered
