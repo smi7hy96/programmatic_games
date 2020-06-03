@@ -1,5 +1,7 @@
+import requests
+
 class Game:
-    def __init__(self, fib_numbers=None, dup_array=None, scrabble_values=None, prime_numbers=None, fizz_numbers=None):
+    def __init__(self, fib_numbers=None, dup_array=None, scrabble_values=None, prime_numbers=None, fizz_numbers=None, chuck_joke = None):
         if fib_numbers is None:
             fib_numbers = {'limit': None, 'iter': None}
         self.fib_numbers = fib_numbers
@@ -15,6 +17,7 @@ class Game:
         if prime_numbers is None:
             prime_numbers = {'limit':  None, 'largest': None}
         self.prime_numbers = prime_numbers
+        self.chuck_joke= chuck_joke
 
     def fibonacci_limit(self):
         fib_list = ['0', '1']
@@ -57,12 +60,12 @@ class Game:
     def scrabble_calc(self):
         score = 0
         for x in self.scrabble_values['string']:
-            score += self.scrabble_points(x.upper())
+            score += self.__scrabble_points(x.upper())
         self.scrabble_values['score'] += score
 
         return f"You scored {score} points! Total Score so far is {self.scrabble_values['score']} points!"
 
-    def scrabble_points(self, letter):
+    def __scrabble_points(self, letter):
         if letter in 'AEIOULNSTR':
             return 1
         elif letter in 'DG':
@@ -81,7 +84,7 @@ class Game:
     def prime_limit(self):
         prime_numbers = []
         for x in range(1, self.prime_numbers['limit']):
-            if self.test_prime(x):
+            if self.__test_prime(x):
                 prime_numbers.append(str(x))
         return ', '.join(prime_numbers)
 
@@ -89,7 +92,7 @@ class Game:
         prime_found = False
         max_number = self.prime_numbers['largest']
         while not prime_found or max_number > 0:
-            if self.test_prime(max_number):
+            if self.__test_prime(max_number):
                 prime_found = True
                 break
             else:
@@ -97,8 +100,7 @@ class Game:
                 break
         return str(max_number)
 
-
-    def test_prime(self, num):
+    def __test_prime(self, num):
         if num > 1:
             if num == 2:
                 return True
@@ -111,3 +113,8 @@ class Game:
             return True
         else:
             return False
+
+    def get_chuck_joke(self):
+        joke = requests.get('https://api.chucknorris.io/jokes/random')
+        self.chuck_joke = joke.json()['value']
+        return self.chuck_joke

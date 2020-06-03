@@ -25,3 +25,6 @@ class GameTest(unittest.TestCase):
 
     def test_prime_largest(self):
         self.assertEqual(self.game.prime_largest(), '19')
+
+    def test_get_chuck_joke(self):
+        self.assertIsInstance((self.game.get_chuck_joke()), str)
